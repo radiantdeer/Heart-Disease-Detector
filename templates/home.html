@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
+{% set title = "Heart Disease Detector" %}
 {% block content %}
-    <form method="POST" action="">
+    <form method="POST" action="" style="width : 100%;">
         <!-- age -->
         <div class="form-group row">
             <label for="age" class="col-sm-2 col-form-label">Age</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="age" placeholder="Age">
+                <input type="number" class="form-control" id="age" name="age" placeholder="Age">
             </div>
         </div>
         <!-- sex -->
@@ -14,14 +15,14 @@
                 <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sex" id="male" value="option1"
+                        <input class="form-check-input" type="radio" name="sex" id="male" value="1"
                             checked>
                         <label class="form-check-label" for="gridRadios1">
                             Male
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sex" id="female" value="option2">
+                        <input class="form-check-input" type="radio" name="sex" id="female" value="0">
                         <label class="form-check-label" for="gridRadios2">
                             Female
                         </label>
@@ -65,14 +66,14 @@
         <div class="form-group row">
             <label for="bloodPressure" class="col-sm-2 col-form-label">Resting Blood Pressure</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="bloodPressure" placeholder="Resting Blood Pressure (mmHg)">
+                <input type="number" class="form-control" name="bloodPressure" id="bloodPressure" placeholder="Resting Blood Pressure (mmHg)">
             </div>
         </div>
         <!-- serum cholestrol -->
         <div class="form-group row">
             <label for="serumCholestrol" class="col-sm-2 col-form-label">Serum Cholestrol</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="serumCholestrol" placeholder="Serum Cholestrol (mg/dl)">
+                <input type="number" class="form-control" name="serumCholestrol" id="serumCholestrol" placeholder="Serum Cholestrol (mg/dl)">
             </div>
         </div>
         <!-- fasting blood sugar > 120 mg/dl -->
@@ -152,7 +153,7 @@
         <div class="form-group row">
             <label for="stDepression" class="col-sm-2 col-form-label">ST depression induced by exercise relative to rest</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="stDepression" placeholder="ST depression induced by exercise relative to rest">
+                <input type="number" class="form-control" id="stDepression" name="stDepression" placeholder="ST depression induced by exercise relative to rest">
             </div>
         </div>
         <!-- peak exercise ST segment -->
@@ -183,9 +184,9 @@
         </fieldset>
         <!-- number of major vessels (0-3) colored by flourosopy -->
         <div class="form-group row">
-            <label for="stDepression" class="col-sm-2 col-form-label">number of major vessels (0-3) colored by flourosopy</label>
+            <label for="major-fluorosopy" class="col-sm-2 col-form-label">number of major vessels (0-3) colored by flourosopy</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="stDepression" placeholder="0-3">
+                <input type="number" class="form-control" name="major-fluorosopy" id="major-fluorosopy" placeholder="0-3">
             </div>
         </div>
         <!-- thal -->
@@ -218,8 +219,49 @@
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="button" class="btn btn-primary form-submit-btn">Submit</button>
             </div>
         </div>
     </form>
+
 {% endblock content %}
+{% block scripts %}
+<script>
+    $(".form-submit-btn").click(function(){
+        var gender_in = $("input[name='sex']:checked").val();
+        var age_in = $("input[name='age']").val();
+        var cp_in = $("input[name='chest-pain']:checked").val();
+        var blood_pres_in = $("input[name='bloodPressure']").val();
+        var serum_in = $("input[name='serumCholestrol']").val();
+        var fasting_bld_sgr_in = $("input[name='FastingBloodSugar']:checked").val();
+        var ecg_in = $("input[name='restingECG']:checked").val();
+        var max_heart_rate_in = $("input[name='exerciseInducedAngina']:checked").val();
+        var st_depression_in = $("input[name='stDepression']").val();
+        var peak_exercise_st_in = $("input[name='peakExerciseSTSegment']:checked").val();
+        var major_fluorosopy_in = $("input[name='major-fluorosopy']").val();
+        var thal_in = $("input[name='thal']:checked").val();
+        
+        $.ajax({
+            method : "POST",
+            url : "/process",
+            data : {gender : gender_in, 
+                age : age_in, 
+                chest_pain : cp_in,
+                blood_pres : blood_pres_in,
+                serum : serum_in,
+                fasting_blood_sugar : fasting_bld_sgr_in,
+                resting_ecg : ecg_in,
+                max_heart_rate : max_heart_rate_in,
+                st_depression : st_depression_in,
+                peak_exercise : peak_exercise_st_in,
+                major_fluorosopy : major_fluorosopy_in,
+                thal : thal_in
+                }
+        }).done(function(msg){
+            result = JSON.parse(msg);
+            alert(result["response_text"]);
+        }); 
+    });
+    
+</script>
+{% endblock scripts %}
