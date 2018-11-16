@@ -35,27 +35,181 @@
                 <legend class="col-form-label col-sm-2 pt-0">Chest-pain type</legend>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="typical angina" value="option1" checked>
+                        <input class="form-check-input" type="radio" name="chest-pain" id="typical angina" value="1" checked>
                         <label class="form-check-label" for="gridRadios1">
                             typical angina
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="atypical angina" value="option2">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="atypical angina" value="2">
                         <label class="form-check-label" for="gridRadios2">
                             atypical angina
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="non-anginal pain" value="option2">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="non-anginal pain" value="3">
                         <label class="form-check-label" for="gridRadios3">
                             non-anginal pain
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="asymptotic" value="option2">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="asymptotic" value="4">
                         <label class="form-check-label" for="gridRadios4">
                             asymptotic
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- resting blood pressure -->
+        <div class="form-group row">
+            <label for="bloodPressure" class="col-sm-2 col-form-label">Resting Blood Pressure</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="bloodPressure" placeholder="Resting Blood Pressure (mmHg)">
+            </div>
+        </div>
+        <!-- serum cholestrol -->
+        <div class="form-group row">
+            <label for="serumCholestrol" class="col-sm-2 col-form-label">Serum Cholestrol</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="serumCholestrol" placeholder="Serum Cholestrol (mg/dl)">
+            </div>
+        </div>
+        <!-- fasting blood sugar > 120 mg/dl -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Fasting Blood Sugar > 120 mg/dl</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="FastingBloodSugar" id="true" value="1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            True
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="FastingBloodSugar" id="false" value="0">
+                        <label class="form-check-label" for="gridRadios2">
+                            False
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- resting ECG -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Resting ECG</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="restingECG" id="normal" value="0" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Normal
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="restingECG" id="havingST" value="1">
+                        <label class="form-check-label" for="gridRadios2">
+                            Having ST-T wave abnormality
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="restingECG" id="LVH" value="2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Left Ventricular Hyperthrophy
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- max-heart rate achieved -->
+        <div class="form-group row">
+            <label for="maxHeartRate" class="col-sm-2 col-form-label">Max-heart Rate Achieved</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="maxHeartRate" placeholder="Max-heart Rate Achieved">
+            </div>
+        </div>
+        <!-- exercise induced angina -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Exercise Induced Angina</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exerciseInducedAngina" id="true" value="1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exerciseInducedAngina" id="false" value="0">
+                        <label class="form-check-label" for="gridRadios2">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- ST depression induced by exercise relative to rest -->
+        <div class="form-group row">
+            <label for="stDepression" class="col-sm-2 col-form-label">ST depression induced by exercise relative to rest</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="stDepression" placeholder="ST depression induced by exercise relative to rest">
+            </div>
+        </div>
+        <!-- peak exercise ST segment -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Peak Exercise ST Segment</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="upsloping" value="1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Upsloping
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="flat" value="2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Flat
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="downsloping" value="3">
+                        <label class="form-check-label" for="gridRadios2">
+                            Downsloping
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- number of major vessels (0-3) colored by flourosopy -->
+        <div class="form-group row">
+            <label for="stDepression" class="col-sm-2 col-form-label">number of major vessels (0-3) colored by flourosopy</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="stDepression" placeholder="0-3">
+            </div>
+        </div>
+        <!-- thal -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Peak Exercise ST Segment</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="thal" id="normal" value="3"
+                            checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Normal
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="thal" id="fixedDefect" value="6">
+                        <label class="form-check-label" for="gridRadios2">
+                            Fixed Defect
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="thal" id="reversableDefect" value="7">
+                        <label class="form-check-label" for="gridRadios2">
+                            Reversable Defect
                         </label>
                     </div>
                 </div>
