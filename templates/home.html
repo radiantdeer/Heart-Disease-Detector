@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block content %}
+    <form method="POST" action="">
+        <!-- age -->
+        <div class="form-group row">
+            <label for="age" class="col-sm-2 col-form-label">Age</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="age" placeholder="Age">
+            </div>
+        </div>
+        <!-- sex -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sex" id="male" value="option1"
+                            checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sex" id="female" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <!-- chest-pain type -->
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Chest-pain type</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="typical angina" value="option1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                            typical angina
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="atypical angina" value="option2">
+                        <label class="form-check-label" for="gridRadios2">
+                            atypical angina
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="non-anginal pain" value="option2">
+                        <label class="form-check-label" for="gridRadios3">
+                            non-anginal pain
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="chest-pain" id="asymptotic" value="option2">
+                        <label class="form-check-label" for="gridRadios4">
+                            asymptotic
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
