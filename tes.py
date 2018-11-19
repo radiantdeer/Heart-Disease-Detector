@@ -28,19 +28,22 @@ def process():
         resting_ecg = int(request.form["resting_ecg"]);
         max_heart_rate = int(request.form["max_heart_rate"]);
         exc_induced = int(request.form["exc_induced"]);
-        st_depression = int(request.form["st_depression"]);
+        st_depression = float(request.form["st_depression"]);
         peak_exercise = int(request.form["peak_exercise"]);
         major_fluorosopy = int(request.form["major_fluorosopy"]);
         thal = int(request.form["thal"]);
 
-        new_instance = [gender,age,chest_pain,blood_pres,serum,fasting_blood,resting_ecg,max_heart_rate, exc_induced, st_depression, peak_exercise, major_fluorosopy, thal];
+        new_instance = [age,gender,chest_pain,blood_pres,serum,fasting_blood,resting_ecg,max_heart_rate, exc_induced, st_depression, peak_exercise, major_fluorosopy, thal];
 
         prediction = loaded_model.predict([new_instance]);
-        print(prediction)
+        print(prediction);
+        response_text = str(prediction[0]);
+        """
         if (prediction[0] == 0):
             response_text = "You don't have heart disease!";
         else:
             response_text = "You have heart disease!";
+        """
 
     except(ValueError):
         print_exc();

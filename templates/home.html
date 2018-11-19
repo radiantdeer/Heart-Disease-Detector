@@ -126,7 +126,7 @@
         <div class="form-group row">
             <label for="maxHeartRate" class="col-sm-2 col-form-label">Max-heart Rate Achieved</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="maxHeartRate" placeholder="Max-heart Rate Achieved">
+                <input type="number" class="form-control" name="maxHeartRate" id="maxHeartRate" placeholder="Max-heart Rate Achieved">
             </div>
         </div>
         <!-- exercise induced angina -->
@@ -228,14 +228,14 @@
 {% block scripts %}
 <script>
     $(".form-submit-btn").click(function(){
-        var gender_in = $("input[name='sex']:checked").val();
         var age_in = $("input[name='age']").val();
+        var gender_in = $("input[name='sex']:checked").val();
         var cp_in = $("input[name='chest-pain']:checked").val();
         var blood_pres_in = $("input[name='bloodPressure']").val();
         var serum_in = $("input[name='serumCholestrol']").val();
         var fasting_bld_sgr_in = $("input[name='FastingBloodSugar']:checked").val();
         var ecg_in = $("input[name='restingECG']:checked").val();
-        var max_heart_rate_in = $("input[name='exerciseInducedAngina']:checked").val();
+        var max_heart_rate_in = $("input[name='maxHeartRate']").val();
         var exc_induced_in = $("input[name='exerciseInducedAngina']:checked").val(); 
         var st_depression_in = $("input[name='stDepression']").val();
         var peak_exercise_st_in = $("input[name='peakExerciseSTSegment']:checked").val();
@@ -245,8 +245,9 @@
         $.ajax({
             method : "POST",
             url : "/process",
-            data : {gender : gender_in, 
+            data : {
                 age : age_in, 
+                gender : gender_in, 
                 chest_pain : cp_in,
                 blood_pres : blood_pres_in,
                 serum : serum_in,
