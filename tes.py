@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 import json
 from sklearn.externals import joblib
 from traceback import print_exc
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 Flask.debug = True
 
-loaded_model = joblib.load("NB.dat")
+loaded_model = joblib.load("TREE.dat")
 
 @app.route("/", methods=['GET'])
 def home():
