@@ -1,228 +1,165 @@
 {% extends "layout.html" %}
 {% set title = "Heart Disease Detector" %}
 {% block content %}
-    <form method="POST" action="" style="width : 100%;">
-        <!-- age -->
-        <div class="form-group row">
-            <label for="age" class="col-sm-2 col-form-label">Age</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" id="age" name="age" placeholder="Age">
+    <div class="mdl-card mdl-shadow--4dp" style="margin : 10px auto 10px auto;">
+        <form method="POST" action="">
+        <div class="mdl-card__supporting-text mdl-card--border">
+            <!-- age -->
+            <h6>Age</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" id="age" name="age" />
+                <label for="age" class="mdl-textfield__label">Age...</label>
             </div>
-        </div>
-        <!-- sex -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sex" id="male" value="1"
-                            checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Male
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="sex" id="female" value="0">
-                        <label class="form-check-label" for="gridRadios2">
-                            Female
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- chest-pain type -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Chest-pain type</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="typical angina" value="1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            typical angina
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="atypical angina" value="2">
-                        <label class="form-check-label" for="gridRadios2">
-                            atypical angina
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="non-anginal pain" value="3">
-                        <label class="form-check-label" for="gridRadios3">
-                            non-anginal pain
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="chest-pain" id="asymptotic" value="4">
-                        <label class="form-check-label" for="gridRadios4">
-                            asymptotic
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- resting blood pressure -->
-        <div class="form-group row">
-            <label for="bloodPressure" class="col-sm-2 col-form-label">Resting Blood Pressure</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="bloodPressure" id="bloodPressure" placeholder="Resting Blood Pressure (mmHg)">
-            </div>
-        </div>
-        <!-- serum cholestrol -->
-        <div class="form-group row">
-            <label for="serumCholestrol" class="col-sm-2 col-form-label">Serum Cholestrol</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="serumCholestrol" id="serumCholestrol" placeholder="Serum Cholestrol (mg/dl)">
-            </div>
-        </div>
-        <!-- fasting blood sugar > 120 mg/dl -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Fasting Blood Sugar > 120 mg/dl</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FastingBloodSugar" id="true" value="1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            True
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="FastingBloodSugar" id="false" value="0">
-                        <label class="form-check-label" for="gridRadios2">
-                            False
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- resting ECG -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Resting ECG</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="restingECG" id="normal" value="0" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Normal
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="restingECG" id="havingST" value="1">
-                        <label class="form-check-label" for="gridRadios2">
-                            Having ST-T wave abnormality
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="restingECG" id="LVH" value="2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Left Ventricular Hyperthrophy
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- max-heart rate achieved -->
-        <div class="form-group row">
-            <label for="maxHeartRate" class="col-sm-2 col-form-label">Max-heart Rate Achieved</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="maxHeartRate" id="maxHeartRate" placeholder="Max-heart Rate Achieved">
-            </div>
-        </div>
-        <!-- exercise induced angina -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Exercise Induced Angina</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exerciseInducedAngina" id="true" value="1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Yes
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exerciseInducedAngina" id="false" value="0">
-                        <label class="form-check-label" for="gridRadios2">
-                            No
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- ST depression induced by exercise relative to rest -->
-        <div class="form-group row">
-            <label for="stDepression" class="col-sm-2 col-form-label">ST depression induced by exercise relative to rest</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" id="stDepression" name="stDepression" placeholder="ST depression induced by exercise relative to rest">
-            </div>
-        </div>
-        <!-- peak exercise ST segment -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Peak Exercise ST Segment</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="upsloping" value="1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Upsloping
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="flat" value="2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Flat
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="peakExerciseSTSegment" id="downsloping" value="3">
-                        <label class="form-check-label" for="gridRadios2">
-                            Downsloping
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-        <!-- number of major vessels (0-3) colored by flourosopy -->
-        <div class="form-group row">
-            <label for="major-fluorosopy" class="col-sm-2 col-form-label">number of major vessels (0-3) colored by flourosopy</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" name="major-fluorosopy" id="major-fluorosopy" placeholder="0-3">
-            </div>
-        </div>
-        <!-- thal -->
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Peak Exercise ST Segment</legend>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="thal" id="normal" value="3"
-                            checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Normal
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="thal" id="fixedDefect" value="6">
-                        <label class="form-check-label" for="gridRadios2">
-                            Fixed Defect
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="thal" id="reversableDefect" value="7">
-                        <label class="form-check-label" for="gridRadios2">
-                            Reversable Defect
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
 
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="button" class="btn btn-primary form-submit-btn">Submit</button>
+            <!-- sex -->
+            <h6>Gender</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="male">
+                <input class="mdl-radio__button" type="radio" name="sex" id="male" value="1" checked>
+                <span class="mdl-radio__label">Male</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="female">
+                <input class="mdl-radio__button" type="radio" name="sex" id="female" value="0">
+                <span class="mdl-radio__label">Female</span>
+            </label>
+
+            <!-- chest-pain type -->
+            <h6>Chest-pain type</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="typical-angina">
+                <input class="mdl-radio__button" type="radio" name="chest-pain" id="typical-angina" value="1" checked>
+                <span class="mdl-radio__label">typical angina</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="atypical-angina">
+                <input class="mdl-radio__button" type="radio" name="chest-pain" id="atypical-angina" value="2">
+                <span class="mdl-radio__label">atypical angina</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="non-anginal-pain">
+                <input class="mdl-radio__button" type="radio" name="chest-pain" id="non-anginal-pain" value="3">
+                <span class="mdl-radio__label" for="gridRadios3">non-anginal pain</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="asymptotic">
+                <input class="mdl-radio__button" type="radio" name="chest-pain" id="asymptotic" value="4">
+                <span class="mdl-radio__label" for="gridRadios4">asymptotic</span>
+            </label>
+            <br>
+
+            <!-- resting blood pressure -->
+            <h6>Resting Blood Pressure</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" name="bloodPressure" id="bloodPressure" />
+                <label for="bloodPressure" class="mdl-textfield__label">Resting Blood Pressure (mmHg)</label>
             </div>
+
+            <!-- serum cholestrol -->
+            <h6>Serum Cholestrol (mg/dl)</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" name="serumCholestrol" id="serumCholestrol" />
+                <label for="serumCholestrol" class="mdl-textfield__label">Serum Cholestrol (mg/dl)</label>
+            </div>
+
+            <!-- fasting blood sugar > 120 mg/dl -->
+            <h6>Fasting Blood Sugar > 120 mg/dl</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fbs-true">
+                <input class="mdl-radio__button" type="radio" name="FastingBloodSugar" id="fbs-true" value="1" checked>
+                <span class="mdl-radio__label">True</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fbs-false">
+                <input class="mdl-radio__button" type="radio" name="FastingBloodSugar" id="fbs-false" value="0">
+                <span class="mdl-radio__label">False</span>
+            </label>
+            
+            <!-- resting ECG -->
+            <h6>Resting ECG</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="normal">
+                <input class="mdl-radio__button" type="radio" name="restingECG" id="normal" value="0" checked>
+                <span class="mdl-radio__label">Normal</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="havingST">
+                <input class="mdl-radio__button" type="radio" name="restingECG" id="havingST" value="1">
+                <span class="mdl-radio__label">Having ST-T wave abnormality</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="LVH">      
+                <input class="mdl-radio__button" type="radio" name="restingECG" id="LVH" value="2">
+                <span class="mdl-radio__label">Left Ventricular Hyperthrophy</span>
+            </label>
+
+            <!-- max-heart rate achieved -->
+            <h6>Max Heart Rate Achieved</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" name="maxHeartRate" id="maxHeartRate" />
+                <label for="maxHeartRate" class="mdl-textfield__label">Max-heart Rate Achieved</label>
+            </div>
+
+            <!-- exercise induced angina -->
+            <h6>Exercise Induced Angina</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="eia-true">
+                <input class="mdl-radio__button" type="radio" name="exerciseInducedAngina" id="eia-true" value="1" checked>
+                <span class="mdl-radio__label" for="gridRadios1">Yes</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="eia-false">
+                <input class="mdl-radio__button" type="radio" name="exerciseInducedAngina" id="eia-false" value="0">
+                <span class="mdl-radio__label" for="gridRadios2">No</span>
+            </label>
+
+            <!-- ST depression induced by exercise relative to rest -->
+            <h6>ST depression induced by exercise relative to rest</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" id="stDepression" name="stDepression" />
+                <label for="stDepression" class="mdl-textfield__label">ST depression induced by exercise relative to rest</label>
+            </div>
+
+            <!-- peak exercise ST segment -->
+            <h6>Peak Exercise ST Segment</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="upsloping">
+                <input class="mdl-radio__button" type="radio" name="peakExerciseSTSegment" id="upsloping" value="1" checked>
+                <span class="mdl-radio__label">Upsloping</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="flat">
+                <input class="mdl-radio__button" type="radio" name="peakExerciseSTSegment" id="flat" value="2">
+                <span class="mdl-radio__label">Flat</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="downsloping">
+                <input class="mdl-radio__button" type="radio" name="peakExerciseSTSegment" id="downsloping" value="3">
+                <span class="mdl-radio__label">Downsloping</span>
+            </label>
+
+            <!-- number of major vessels (0-3) colored by flourosopy -->
+            <h6>Number of major vessels (0-3) colored by fluorosopy</h6>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input type="number" class="mdl-textfield__input" name="major-fluorosopy" id="major-fluorosopy" />
+                <label for="major-fluorosopy" class="mdl-textfield__label">Number of major vessels (0-3) colored by flourosopy</label>
+            </div>
+
+            <!-- thal -->
+            <h6>Thal</h6>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="normal">
+                <input class="mdl-radio__button" type="radio" name="thal" id="normal" value="3" checked>
+                <label class="mdl-radio__label" for="gridRadios1">Normal</label>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fixedDefect">
+                <input class="mdl-radio__button" type="radio" name="thal" id="fixedDefect" value="6">
+                <span class="mdl-radio__label" for="gridRadios2">Fixed Defect</span>
+            </label>
+            <br>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="reversableDefect">
+                <input class="mdl-radio__button" type="radio" name="thal" id="reversableDefect" value="7">
+                <span class="mdl-radio__label" for="gridRadios2">Reversable Defect</span>
+            </label>
+
+        </div> 
+        <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-layout-spacer"></div>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored form-submit-btn" style="margin : 0 auto 0 auto;">Submit</button>
+            <div class="mdl-layout-spacer"></div>
         </div>
-    </form>
+        </form>
+    </div>
 
 {% endblock content %}
 {% block scripts %}
