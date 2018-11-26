@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import json
 import numpy as np
-from pandas import read_csv
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import RobustScaler
 from sklearn.externals import joblib
@@ -19,6 +18,7 @@ def home():
 
 @app.route("/process", methods=['POST'])
 def process():
+    global data_transformer, loaded_model
     status = 0
     response_text = ""
     try:
@@ -39,7 +39,6 @@ def process():
 
         # Constructing into a new instance
         new_instance = [[age,gender,chest_pain,blood_pres,serum,fasting_blood,resting_ecg,max_heart_rate, exc_induced, st_depression, peak_exercise, major_fluorosopy, thal]];
-        print(new_instance);
 
         # Transform new instance so that it's compatible with the model
         new_instance = data_transformer.transform(new_instance);
@@ -49,6 +48,7 @@ def process():
         prediction = loaded_model.predict(new_instance);
         print(prediction);
         response_text = str(prediction[0]);
+
         """
         if (prediction[0] == 0):
             response_text = "You don't have heart disease!";

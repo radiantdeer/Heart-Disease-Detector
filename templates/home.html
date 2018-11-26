@@ -1,14 +1,30 @@
 {% extends "layout.html" %}
 {% set title = "Heart Disease Detector" %}
 {% block content %}
-    <div class="mdl-card mdl-shadow--4dp" style="margin : 10px auto 10px auto;">
+
+    <!-- "Loading" view - hidden at start -->
+    <div class="mdl-card mdl-shadow--4dp loading-card" style="margin : 10px auto 10px auto; display : none;">
+        <div class="mdl-card__supporting-text mdl-card--border">
+            <div class="mdl-spinner mdl-js-spinner is-active" style="margin : 10px auto auto auto"></div>
+            <h6 class="res-text" style="margin : 10px auto auto auto; text-align : center;">Loading...</h6>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-layout-spacer"></div>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored back-btn" style="margin : 0 auto 0 auto;">Back</button>
+            <div class="mdl-layout-spacer"></div>
+        </div>
+    </div>
+
+    <!-- Form view -->
+    <div class="mdl-card mdl-shadow--4dp form-card" style="margin : 10px auto 10px auto;">
         <form method="POST" action="">
         <div class="mdl-card__supporting-text mdl-card--border">
             <!-- age -->
             <h6>Age</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" id="age" name="age" />
+                <input type="text" class="mdl-textfield__input" id="age" pattern="-?[0-9]*(\.[0-9]+)?" name="age" />
                 <label for="age" class="mdl-textfield__label">Age...</label>
+                <span class="mdl-textfield__error">Numbers only, please...!</span>
             </div>
 
             <!-- sex -->
@@ -49,15 +65,17 @@
             <!-- resting blood pressure -->
             <h6>Resting Blood Pressure</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" name="bloodPressure" id="bloodPressure" />
+                <input type="text" class="mdl-textfield__input" name="bloodPressure" pattern="-?[0-9]*(\.[0-9]+)?" id="bloodPressure" />
                 <label for="bloodPressure" class="mdl-textfield__label">Resting Blood Pressure (mmHg)</label>
+                <span class="mdl-textfield__error">Numbers only...!</span>
             </div>
 
             <!-- serum cholestrol -->
             <h6>Serum Cholestrol (mg/dl)</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" name="serumCholestrol" id="serumCholestrol" />
+                <input type="text" class="mdl-textfield__input" name="serumCholestrol" pattern="-?[0-9]*(\.[0-9]+)?" id="serumCholestrol" />
                 <label for="serumCholestrol" class="mdl-textfield__label">Serum Cholestrol (mg/dl)</label>
+                <span class="mdl-textfield__error">Numbers only...!</span>
             </div>
 
             <!-- fasting blood sugar > 120 mg/dl -->
@@ -89,8 +107,9 @@
             <!-- max-heart rate achieved -->
             <h6>Max Heart Rate Achieved</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" name="maxHeartRate" id="maxHeartRate" />
+                <input type="text" class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" name="maxHeartRate" id="maxHeartRate" />
                 <label for="maxHeartRate" class="mdl-textfield__label">Max-heart Rate Achieved</label>
+                <span class="mdl-textfield__error">Numbers only...!</span>
             </div>
 
             <!-- exercise induced angina -->
@@ -107,8 +126,9 @@
             <!-- ST depression induced by exercise relative to rest -->
             <h6>ST depression induced by exercise relative to rest</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" id="stDepression" name="stDepression" />
+                <input type="text" class="mdl-textfield__input" pattern="-?[0-9]*(\.[0-9]+)?" id="stDepression" name="stDepression" />
                 <label for="stDepression" class="mdl-textfield__label">ST depression induced by exercise relative to rest</label>
+                <span class="mdl-textfield__error">Numbers only...!</span>
             </div>
 
             <!-- peak exercise ST segment -->
@@ -131,8 +151,9 @@
             <!-- number of major vessels (0-3) colored by flourosopy -->
             <h6>Number of major vessels (0-3) colored by fluorosopy</h6>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input type="number" class="mdl-textfield__input" name="major-fluorosopy" id="major-fluorosopy" />
+                <input type="text" class="mdl-textfield__input" pattern="[0-3]" name="major-fluorosopy" id="major-fluorosopy" />
                 <label for="major-fluorosopy" class="mdl-textfield__label">Number of major vessels (0-3) colored by flourosopy</label>
+                <span class="mdl-textfield__error">Range error! (only 0 - 3 accepted)</span>
             </div>
 
             <!-- thal -->
@@ -164,8 +185,30 @@
 {% endblock content %}
 {% block scripts %}
 <script>
+    function hideForm() {
+        $(".form-card").css({"display" : "none"});
+    }
+
+    function showForm() {
+        $(".form-card").css({"display" : "block"});
+    }
+
+    function showLoading() {
+        $(".loading-card").css({"display" : "block"});
+        $(".loading-card .mdl-spinner").css({"display" : "block"});
+        $(".loading-card .res-text").html("Loading...");
+    }
+
+    function hideLoading() {
+        $(".loading-card").css({"display" : "none"});
+    }
+
     $(".form-submit-btn").click(function(){
         var age_in = $("input[name='age']").val();
+        if (!age_in) {
+            $("input[name='age']").focus();
+            return;
+        }
         var gender_in = $("input[name='sex']:checked").val();
         var cp_in = $("input[name='chest-pain']:checked").val();
         var blood_pres_in = $("input[name='bloodPressure']").val();
@@ -179,6 +222,9 @@
         var major_fluorosopy_in = $("input[name='major-fluorosopy']").val();
         var thal_in = $("input[name='thal']:checked").val();
         
+        hideForm();
+        showLoading();
+
         $.ajax({
             method : "POST",
             url : "/process",
@@ -197,10 +243,22 @@
                 major_fluorosopy : major_fluorosopy_in,
                 thal : thal_in
                 }
-        }).done(function(msg){
+        }).done(function(msg) {
             result = JSON.parse(msg);
-            alert(result["response_text"]);
+            $(".loading-card .mdl-spinner").css({"display" : "none"});
+            if (result["response_text"] == 0) {
+                $(".loading-card .res-text").html("Congratulations! You don't have heart disease!<br> Label : 0");
+            } else if ((result["response-text"] == 1) || (result["response-text"] == 2) || (result["response-text"] == 3) || (result["response-text"] == 4)) {
+                $(".loading-card .res-text").html("You have heart disease...<br> Label : " + result["response_text"]);
+            } else {
+                $(".loading-card .res-text").html("Internal server error...<br>Please try again later...");
+            }
         }); 
+    });
+
+    $(".back-btn").click(function(){
+        hideLoading();
+        showForm();
     });
     
 </script>
