@@ -182,6 +182,11 @@
         </form>
     </div>
 
+    <div id="toast-content" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
 {% endblock content %}
 {% block scripts %}
 <script>
@@ -204,22 +209,85 @@
     }
 
     $(".form-submit-btn").click(function(){
+        // Re-validate, for non-empty fields
         var age_in = $("input[name='age']").val();
+        
         if (!age_in) {
+            showSnackbar("This field is required!");
+            $("input[name='age']").focus();
+            return;
+        } else if (isNaN(age_in)) {
+            showSnackbar("Only numbers allowed!");
             $("input[name='age']").focus();
             return;
         }
+
         var gender_in = $("input[name='sex']:checked").val();
         var cp_in = $("input[name='chest-pain']:checked").val();
         var blood_pres_in = $("input[name='bloodPressure']").val();
+        
+        if (!blood_pres_in) {
+            showSnackbar("This field is required!");
+            $("input[name='bloodPressure']").focus();
+            return;
+        } else if (isNaN(blood_pres_in)) {
+            showSnackbar("Only numbers allowed!");
+            $("input[name='bloodPressure']").focus();
+            return;
+        }
+
         var serum_in = $("input[name='serumCholestrol']").val();
+        
+        if (!serum_in) {
+            showSnackbar("This field is required!");
+            $("input[name='serumCholestrol']").focus();
+            return;
+        } else if (isNaN(serum_in)) {
+            showSnackbar("Only numbers allowed!");
+            $("input[name='serumCholestrol']").focus();
+            return;
+        }
+
         var fasting_bld_sgr_in = $("input[name='FastingBloodSugar']:checked").val();
         var ecg_in = $("input[name='restingECG']:checked").val();
         var max_heart_rate_in = $("input[name='maxHeartRate']").val();
+        
+        if (!max_heart_rate_in) {
+            showSnackbar("This field is required!");
+            $("input[name='maxHeartRate']").focus();
+            return;
+        } else if (isNaN(max_heart_rate_in)) {
+            showSnackbar("Only numbers allowed!");
+            $("input[name='maxHeartRate']").focus();
+            return;
+        }
+
         var exc_induced_in = $("input[name='exerciseInducedAngina']:checked").val(); 
         var st_depression_in = $("input[name='stDepression']").val();
+
+        if (!st_depression_in) {
+            showSnackbar("This field is required!");
+            $("input[name='stDepression']").focus();
+            return;
+        } else if (isNaN(st_depression_in)) {
+            showSnackbar("Only numbers allowed!");
+            $("input[name='stDepression']").focus();
+            return;
+        }
+
         var peak_exercise_st_in = $("input[name='peakExerciseSTSegment']:checked").val();
         var major_fluorosopy_in = $("input[name='major-fluorosopy']").val();
+
+        if (!major_fluorosopy_in) {
+            showSnackbar("This field is required!");
+            $("input[name='major-fluorosopy']").focus();
+            return;
+        } else if (isNaN(major_fluorosopy_in)) {
+            showSnackbar("Only numbers allowed!");
+            $("input[name='major-fluorosopy']").focus();
+            return;
+        }
+
         var thal_in = $("input[name='thal']:checked").val();
         
         hideForm();
@@ -247,19 +315,24 @@
             result = JSON.parse(msg);
             $(".loading-card .mdl-spinner").css({"display" : "none"});
             if (result["response_text"] == 0) {
-                $(".loading-card .res-text").html("Congratulations! You don't have heart disease!<br> Label : 0");
-            } else if ((result["response-text"] == 1) || (result["response-text"] == 2) || (result["response-text"] == 3) || (result["response-text"] == 4)) {
-                $(".loading-card .res-text").html("You have heart disease...<br> Label : " + result["response_text"]);
+                $(".loading-card .res-text").html("Congratulations!<br>You don't have heart disease!<br><br>Label : 0");
+            } else if ((result["response_text"] == 1) || (result["response_text"] == 2) || (result["response_text"] == 3) || (result["response_text"] == 4)) {
+                $(".loading-card .res-text").html("You have heart disease...<br><br>Label : " + result["response_text"]);
             } else {
                 $(".loading-card .res-text").html("Internal server error...<br>Please try again later...");
             }
         }); 
     });
 
-    $(".back-btn").click(function(){
+    $(".back-btn").click(function() {
         hideLoading();
         showForm();
     });
+    
+    function showSnackbar(msg) {
+        var snackbarContainer = document.querySelector('#toast-content');
+        snackbarContainer.MaterialSnackbar.showSnackbar({message : msg});
+    }
     
 </script>
 {% endblock scripts %}

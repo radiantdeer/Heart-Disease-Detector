@@ -49,21 +49,10 @@ def process():
         print(prediction);
         response_text = str(prediction[0]);
 
-        """
-        if (prediction[0] == 0):
-            response_text = "You don't have heart disease!";
-        else:
-            response_text = "You have heart disease!";
-        """
-
     except(ValueError):
         print_exc();
         response_text = "Parsing error!";
         status = -1;
-    except(KeyError):
-        print_exc();
-        response_text = "Please fill in all the fields!";
-        status = -2;
     except:
         print_exc();
         response_text = "Unhandled exception occured!";
