@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% if title %}
+        <title>{{title}} - ASaja</title>
+    {% else %}
+        <title>ASaja</title>
+    {% endif %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Material Design Lite CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Material Design Lite JS -->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        h6 {
+            color : #000000;
+        }
+
+        .mdl-spinner {
+            width: 56px;
+            height: 56px;
+        }
+
+        .mdl-spinner__circle {
+            border-width: 6px;
+        }
+    </style>
+
+</head>
+
+<body style="background-image : url('./static/bg.jpg'); background-repeat : repeat;">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--scroll">
+            <div class="mdl-layout__header-row">
+                <!-- Horizontal spacer -->
+                <div class="mdl-layout-spacer"></div>
+                <!-- Title -->
+                <span class="mdl-layout-title">Heart Disease Detector</span>
+                <!-- Horizontal spacer -->
+                <div class="mdl-layout-spacer"></div>
+                </nav>
+            </div>
+        </header>
+        
+        <main class="mdl-layout__content" >
+            {% block content %} {% endblock %}
+
+            <footer class="mdl-mega-footer" style="text-align : center;">
+                Tugas Besar 2 IF 3170 Inteligensi Buatan<br>
+                Kelompok 9 - ASaja<br>
+                Alvin | Antonio | Aristoteles | Juan | Seperayo
+            </footer>
+        
+        </main>     
+
+    </div>
+    {% block scripts %} {% endblock %}
+</body>
+
+</html>

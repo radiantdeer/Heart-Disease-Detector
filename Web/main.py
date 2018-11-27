@@ -59,7 +59,3 @@ def process():
         status = -999;
     
     return json.JSONEncoder().encode({"status" : status, "response_text" : response_text});
-
-@app.route("/about")
-def about():
-    return render_template('about.html', title='about')
